@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halloween Night: A Spooky Adventure!</title>
+<style>
+:root{--bg:#1a0a38;--bg2:#2d1363;--lav:#d9c8ff;--or:#ff8a1f;--ink:#fff;--card:#3a1d7a;--gr:#8be04e;--yl:#ffd84a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0a38}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(circle at 80% 10%,#4b2396,var(--bg) 60%);color:var(--ink);font-family:"Baloo 2","Trebuchet MS",Verdana,sans-serif;font-size:clamp(15px,1.9vw,20px);overflow:hidden}
+h1,h2,h3{font-family:Georgia,"Palatino Linotype",serif;margin:.1em 0 .3em;line-height:1.1}
+h1{font-size:clamp(34px,7vw,72px);color:var(--or);text-shadow:0 4px 0 #000}
+h2{font-size:clamp(24px,4vw,40px);color:var(--or)}
+h3{font-size:1.1em;color:var(--yl)}
+#deck{height:100%;position:relative}
+.s{display:none;height:calc(100% - 56px);overflow:auto;padding:18px clamp(14px,4vw,56px);animation:in .4s}
+.s.on{display:block}
+@keyframes in{from{opacity:0}to{opacity:1}}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.c{background:var(--card);border:2px solid var(--or);border-radius:18px 4px 18px 4px;padding:12px}
+.c.l{background:var(--lav);color:#2a1060;border-color:#6b3fd1}
+.c.l h3{color:#b35200}
+.v{text-align:center}
+.v svg,.v .em{width:64px;height:64px;display:block;margin:0 auto 4px;font-size:46px;line-height:64px}
+.v b{font-size:1.15em;color:var(--yl)}
+.v i{display:block;color:var(--lav);font-size:.85em}
+.v p{margin:.3em 0 0;font-size:.9em}
+.ch{display:inline-block;background:var(--bg2);border:2px solid var(--lav);color:#fff;border-radius:99px;padding:6px 14px;margin:4px;cursor:pointer;font:inherit}
+.ch.on{background:var(--or);border-color:var(--or);color:#1a0a38;font-weight:700}
+.btn{background:var(--or);color:#1a0a38;border:0;border-radius:12px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.rv{cursor:pointer;background:#000;color:#000;border-radius:8px;padding:2px 10px;display:inline-block;user-select:none}
+.rv.on{background:var(--gr);color:#102000}
+ul{margin:.3em 0;padding-left:1.1em}
+li{margin:.25em 0}
+.q{color:var(--lav)}
+.hero{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;min-height:100%;text-align:center}
+.hero>div{max-width:620px}
+.sub{font-size:1.3em;color:var(--lav)}
+.tag{background:var(--gr);color:#102000;border-radius:8px;padding:2px 10px;font-weight:700;font-size:.8em}
+canvas{background:#fff;border:3px solid var(--or);border-radius:12px;width:100%;max-width:520px;touch-action:none;display:block}
+.pal i{display:inline-block;width:26px;height:26px;border-radius:50%;border:2px solid #fff;margin:3px;cursor:pointer}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+nav{position:fixed;left:0;right:0;bottom:0;height:56px;padding-bottom:env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;background:#0e0521;border-top:2px solid var(--or)}
+nav span{color:var(--lav);font-size:.85em;text-align:center;flex:1}
+.hs{cursor:pointer}.hs:hover{filter:brightness(1.4)}
+#hi{min-height:2.4em;color:var(--yl)}
+.fl{font-size:2em;float:right}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ghost" viewBox="0 0 64 64"><path d="M10 58V28C10 12 20 6 32 6s22 6 22 22v30l-7-6-7 6-8-6-8 6-7-6z" fill="#fff"/><circle cx="24" cy="28" r="4" fill="#1a0a38"/><circle cx="40" cy="28" r="4" fill="#1a0a38"/><ellipse cx="32" cy="40" rx="5" ry="6" fill="#1a0a38"/></symbol>
+<symbol id="pumpkin" viewBox="0 0 64 64"><rect x="29" y="4" width="7" height="12" rx="3" fill="#5fae2e"/><ellipse cx="20" cy="38" rx="16" ry="21" fill="#e66e00"/><ellipse cx="44" cy="38" rx="16" ry="21" fill="#e66e00"/><ellipse cx="32" cy="38" rx="12" ry="22" fill="#ff8a1f"/><path d="M20 32l6 8-12 0zM44 32l6 8-12 0zM20 48q12 10 24 0l-4-2-4 3-4-3-4 3-4-3z" fill="#2a1000"/></symbol>
+<symbol id="bat" viewBox="0 0 64 64"><path d="M32 18l4-8 2 10c8-8 20-8 26-2-6 2-8 6-8 12-4-4-8-2-10 4-2-4-6-4-8 0-2-4-6-4-8 0-2-6-6-8-10-4 0-6-2-10-8-12 6-6 18-6 26 2l2-10z" fill="#111"/><circle cx="28" cy="30" r="2" fill="#ff0"/><circle cx="36" cy="30" r="2" fill="#ff0"/></symbol>
+<symbol id="cat" viewBox="0 0 64 64"><path d="M14 58c-4-20 0-26 6-30l-4-16 12 8h16l12-8-4 16c6 4 10 10 6 30z" fill="#111" stroke="#8a5cff" stroke-width="2"/><ellipse cx="26" cy="32" rx="3" ry="4" fill="#ffd84a"/><ellipse cx="40" cy="32" rx="3" ry="4" fill="#ffd84a"/><path d="M33 38l-2 2h4z" fill="#ff8aa0"/></symbol>
+<symbol id="hat" viewBox="0 0 64 64"><path d="M32 4l14 38H18z" fill="#111"/><rect x="18" y="34" width="28" height="6" fill="#ff8a1f"/><ellipse cx="32" cy="46" rx="28" ry="7" fill="#111"/></symbol>
+<symbol id="spider" viewBox="0 0 64 64"><path d="M32 0v22" stroke="#fff" stroke-width="1.5"/><g stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"><path d="M24 30L8 20 4 30M24 34L6 38l-2 12M40 30l16-10 4 10M40 34l18 4 2 12"/></g><circle cx="32" cy="38" r="12" fill="#111"/><circle cx="28" cy="35" r="2" fill="#f33"/><circle cx="36" cy="35" r="2" fill="#f33"/></symbol>
+<symbol id="moon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#fff3b0"/><circle cx="22" cy="24" r="5" fill="#e6d88a"/><circle cx="40" cy="38" r="7" fill="#e6d88a"/></symbol>
+<symbol id="skull" viewBox="0 0 64 64"><path d="M32 4C16 4 8 14 8 28c0 8 4 12 8 14v12h32V42c4-2 8-6 8-14C56 14 48 4 32 4z" fill="#f4f0e6"/><circle cx="23" cy="28" r="6" fill="#1a0a38"/><circle cx="41" cy="28" r="6" fill="#1a0a38"/><path d="M32 36l-3 6h6zM24 46v8M32 46v8M40 46v8" stroke="#1a0a38" stroke-width="2"/></symbol>
+<symbol id="pot" viewBox="0 0 64 64"><ellipse cx="32" cy="22" rx="22" ry="6" fill="#222"/><ellipse cx="32" cy="22" rx="18" ry="4" fill="#8be04e"/><path d="M10 22c-2 30 8 36 22 36s24-6 22-36c-4 8-40 8-44 0z" fill="#222"/><circle cx="26" cy="16" r="3" fill="#b6f07a"/><circle cx="38" cy="14" r="2" fill="#b6f07a"/></symbol>
+<symbol id="candy" viewBox="0 0 64 64"><path d="M4 22l14 10L4 42zM60 22L46 32l14 10z" fill="#ff8a1f"/><rect x="16" y="20" width="32" height="24" rx="12" fill="#b57bff"/><path d="M28 20l-6 24M38 20l-6 24" stroke="#fff" stroke-width="3"/></symbol>
+</defs></svg>
+
+<div id="deck">
+
+<!-- 1 -->
+<section class="s on"><div class="hero">
+<svg width="150" height="150"><use href="#moon"/></svg>
+<div><h1>Halloween Night: A Spooky Adventure!</h1><p class="sub">Are you ready for a spooky night?</p><p>Learn English. Get spooky. Have fun!</p>
+<svg width="64" height="64"><use href="#bat"/></svg><svg width="64" height="64"><use href="#ghost"/></svg><svg width="64" height="64"><use href="#pumpkin"/></svg><svg width="64" height="64"><use href="#cat"/></svg><svg width="64" height="64"><use href="#spider"/></svg></div></div></section>
+
+<!-- 2 -->
+<section class="s"><h2>Your mission, Diana</h2>
+<div class="two"><div class="c"><p><b>It’s Halloween night!</b> You have been invited to a mysterious Halloween party. But first, you need to prepare your costume, explore a haunted house, collect candy and solve some spooky challenges!</p></div>
+<div class="c l"><h3>Your adventure map</h3><ul><li>1. Warm-up and spooky words</li><li>2. Design your costume</li><li>3. Explore the haunted house</li><li>4. Spooky games</li><li>5. Party roleplays</li><li>6. Your own story</li><li>7. Your own party!</li></ul></div></div>
+<p class="q">Collect a <svg width="28" height="28" style="vertical-align:middle"><use href="#candy"/></svg> candy after every mission. How many can you get?</p></section>
+
+<!-- 3 -->
+<section class="s"><h2>Warm-up: what’s your spooky mood?</h2>
+<div class="two"><div class="c"><h3>Questions</h3><ul><li>Do you like Halloween?</li><li>Are you afraid of ghosts?</li><li>What is your favorite Halloween character?</li><li>Do you prefer witches or vampires?</li><li>Would you like to visit a haunted house?</li><li>What do you usually do on Halloween?</li></ul></div>
+<div class="c l"><h3>Choose your spooky mood!</h3><div id="mood"></div><p id="mt"><b>Tell me:</b> “I feel ___ because ___.”</p></div></div></section>
+
+<!-- 4 -->
+<section class="s"><h2>Spooky words: characters</h2><div class="g" id="v1"></div></section>
+<!-- 5 -->
+<section class="s"><h2>Spooky words: objects</h2><div class="g" id="v2"></div></section>
+<!-- 6 -->
+<section class="s"><h2>Spooky words: places and activities</h2><div class="g" id="v3"></div></section>
+
+<!-- 7 -->
+<section class="s"><h2>Party expressions</h2>
+<div class="two"><div class="c"><ul><li><b>Trick or treat!</b></li><li><b>Happy Halloween!</b></li><li><b>What a spooky night!</b></li><li><b>I love your costume!</b></li><li><b>That’s scary!</b> <i class="q">(que medo!)</i></li><li><b>I’m dressed as a witch.</b></li><li><b>Can I have some candy, please?</b></li><li><b>This house looks haunted!</b></li><li><b>I’m not afraid!</b></li><li><b>Let’s explore!</b></li></ul></div>
+<div class="c l"><h3>Mini dialogue</h3><p>A: Happy Halloween! I love your costume!<br>B: Thanks! I’m dressed as a vampire. What about you?<br>A: I’m a witch. Look at this house. It looks haunted!<br>B: Don’t worry. I’m not afraid. Let’s explore!</p><p><b>Your turn:</b> change the characters and say it again.</p></div></div></section>
+
+<!-- 8 -->
+<section class="s"><h2>Design your Halloween costume</h2>
+<div class="two"><div><div class="c"><h3>Pick a costume (or invent one!)</h3><div class="pal2" id="cos"></div><h3>Accessories</h3><div id="acc"></div></div>
+<div class="c l" style="margin-top:10px"><h3>Talk about it</h3><ul><li>What costume would you wear? Why?</li><li>What color would it be?</li><li>Would you wear a mask?</li><li>Scary or funny?</li></ul><p>Start with: “I would wear… / My costume would be… / I would look mysterious!”</p></div></div>
+<div><canvas id="cv1" width="520" height="420"></canvas><div class="pal" data-for="cv1"></div><button class="btn" data-clear="cv1">Clear</button><p class="q">Draw and color your costume. Then present it in English!</p></div></div></section>
+
+<!-- 9 -->
+<section class="s"><h2>The haunted house: let’s explore!</h2>
+<svg viewBox="0 0 700 330" style="width:100%;max-height:48vh">
+<rect width="700" height="330" fill="#120628" rx="14"/><use href="#moon" x="590" y="6" width="80" height="80"/>
+<path d="M60 150L350 30l290 120z" fill="#2a1450" stroke="#ff8a1f" stroke-width="3"/>
+<rect x="60" y="150" width="580" height="150" fill="#3a1d7a" stroke="#ff8a1f" stroke-width="3"/>
+<g fill="#24104f" stroke="#ff8a1f"><rect x="60" y="150" width="190" height="75"/><rect x="250" y="150" width="200" height="75"/><rect x="450" y="150" width="190" height="75"/><rect x="60" y="225" width="190" height="75"/><rect x="250" y="225" width="200" height="75"/><rect x="450" y="225" width="190" height="75"/></g>
+<g fill="#d9c8ff" font-size="13" text-anchor="middle"><text x="155" y="168">attic</text><text x="350" y="168">bedroom</text><text x="545" y="168">bathroom</text><text x="155" y="243">living room</text><text x="350" y="243">hallway</text><text x="545" y="243">kitchen</text><text x="350" y="318" fill="#8be04e">garden</text><text x="155" y="318" fill="#8be04e">basement door</text></g>
+<use class="hs" data-t="A ghost is behind the door." href="#ghost" x="290" y="250" width="40" height="40"/>
+<use class="hs" data-t="A pumpkin is on the table." href="#pumpkin" x="120" y="252" width="38" height="38"/>
+<use class="hs" data-t="A black cat is under the chair." href="#cat" x="180" y="258" width="34" height="34"/>
+<use class="hs" data-t="A witch is in the kitchen." href="#hat" x="520" y="250" width="40" height="40"/>
+<use class="hs" data-t="A skeleton is next to the fireplace." href="#skull" x="590" y="255" width="34" height="34"/>
+<use class="hs" data-t="A spider is above the bed." href="#spider" x="330" y="160" width="36" height="46"/>
+<use class="hs" data-t="There are three bats in the attic!" href="#bat" x="90" y="172" width="36" height="36"/><use class="hs" data-t="There are three bats in the attic!" href="#bat" x="130" y="182" width="30" height="30"/><use class="hs" data-t="There are three bats in the attic!" href="#bat" x="175" y="172" width="34" height="34"/>
+<use class="hs" data-t="A candle is in the bathroom." href="#pot" x="520" y="172" width="38" height="38"/>
+</svg>
+<p id="hi">Tap an object to hear the sentence in your head. Then answer!</p>
+<div class="two"><div class="c"><h3>Find the spooky object!</h3><ul><li>Find the black cat! Where is it?</li><li>Where is the pumpkin?</li><li>What is behind the door?</li><li>Is there a ghost in the bedroom?</li></ul></div><div class="c l"><h3>Open questions</h3><ul><li>How many bats can you see?</li><li>What is next to the fireplace?</li><li>Which room is the scariest? Why?</li></ul><p>Use: there is / there are, in, on, under, next to, behind, above.</p></div></div></section>
+
+<!-- 11 -->
+<section class="s"><h2>Game 1: what’s missing?</h2><p>Look for 10 seconds. Close your eyes. I will hide one!</p>
+<div id="wm" style="display:flex;flex-wrap:wrap;gap:12px"></div>
+<p><button class="btn" id="wmb">Hide one!</button> <span id="wmt" class="tag" style="display:none"></span></p>
+<p class="q">Ask: “What’s missing?” Answer: “The ___ is missing!”</p></section>
+
+<!-- 12 -->
+<section class="s"><h2>Game 2: Halloween true or false</h2><div class="g" id="tf"></div><p class="q">Say TRUE or FALSE. Explain: “It’s false because…”</p></section>
+
+<!-- 14 -->
+<section class="s"><h2>You are at the Halloween party!</h2><p class="q">Roleplay. I am a character. You are inside the story.</p><div id="rp"></div><div class="c" id="rpb"></div></section>
+
+<!-- 16 -->
+<section class="s"><h2>The strangest Halloween night!</h2>
+<div class="g"><div class="c v"><svg><use href="#moon"/></svg><p>1. A girl is walking home on Halloween night.</p></div><div class="c v"><svg><use href="#skull"/></svg><p>2. She sees a mysterious house.</p></div><div class="c v"><svg><use href="#cat"/></svg><p>3. The door opens by itself.</p></div><div class="c v"><svg><use href="#bat"/></svg><p>4. She hears a strange noise.</p></div><div class="c v"><svg><use href="#pumpkin"/></svg><p>5. She finds a mysterious pumpkin.</p></div></div>
+<p>Continue the story! Use: <span class="tag">suddenly</span> <span class="tag">then</span> <span class="tag">after that</span> <span class="tag">because</span> <span class="tag">finally</span></p>
+<p class="q">Tell it out loud, or write a short ending (2 to 4 sentences).</p></section>
+
+<!-- 17 -->
+<section class="s"><h2>Final challenge: welcome to my Halloween party!</h2>
+<div class="two"><div class="c"><h3>Plan your party</h3><ul><li>Where will the party be?</li><li>What decorations will you use?</li><li>What food and candy will you serve?</li><li>What costume will you wear?</li><li>Who will you invite?</li><li>What games will you play?</li></ul></div>
+<div class="c l"><h3>Helpers</h3><ul><li>My party will be…</li><li>I want to invite…</li><li>I would wear…</li><li>There will be…</li><li>My favorite decoration is…</li><li>We will play…</li></ul><p>Present it like a host. Start with: “Welcome to my Halloween party!”</p></div></div></section>
+
+<!-- 18 -->
+<section class="s"><h2>Homework: take the adventure home</h2>
+<div class="two"><div class="c"><h3>Main: my Halloween character</h3><p>Invent a witch, vampire, ghost, monster or something new. Draw and color it in your notebook. Write 5 to 7 sentences: name, looks, personality, clothes, powers, home, likes.</p><p class="q">Example (do not copy!): Her name is Luna. She is a young witch. She has long purple hair. She lives in a haunted castle. She loves chocolate!</p></div>
+<div class="c l"><h3>Optional: Halloween photo challenge</h3><p>Find Halloween-looking things at home, or draw a spooky scene. Write 5 sentences with: There is… There are… It is… It has… It is next to…</p><p>Example: There is a pumpkin on the table. There are two bats near the window.</p></div></div></section>
+
+<!-- 19 -->
+<section class="s"><h2>Teacher’s guide (45 min)</h2>
+<div class="two"><div class="c l"><h3>Goals</h3><ul><li>Use Halloween vocabulary in real sentences.</li><li>Practice there is/are, prepositions, I would, descriptions and questions.</li><li>Speak spontaneously in roleplays; connect ideas with then, because, finally.</li></ul>
+<h3>Materials</h3><p>Paper, colored pencils, notebook, timer, optional candy.</p>
+<h3>Timing (45 min)</h3><ul><li>Warm-up 4 · Vocabulary 8 · Expressions 3</li><li>Costume 7 · Haunted house 6 · Games 4</li><li>Roleplays 7 · Story 3 · Party challenge 2 · Homework 1</li></ul></div>
+<div class="c l"><h3>Answers</h3><ul><li>True/false: TRUE, FALSE, TRUE, FALSE, TRUE (vampire and garlic: true in the legends).</li><li>Haunted house: three bats in the attic; the cat is under the chair; the ghost is behind the door.</li></ul>
+<h3>Method</h3><ul><li>Roleplays: you are the host, neighbor or detective. Improvise from her answers; ask “why?” and “what happens next?”.</li><li>Correct by recasting: she says “I wear a witch”, you say “Oh, you’re dressed as a witch!”. Note errors and review at the end.</li><li>Fast finisher: she invents and describes a monster out loud, or swaps roles and asks you the questions.</li><li>Short on time: keep costume, haunted house, roleplay A and B, story.</li></ul></div></div></section>
+
+</div>
+
+<nav><button class="btn" id="pv">Back</button><span id="ct"></span><button class="btn" id="nx">Next</button></nav>
+
+<script>
+var S=[].slice.call(document.querySelectorAll(".s")),i=0,$=function(x){return document.getElementById(x)};
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.classList.toggle("on",k===i)});$("ct").textContent="Mission "+(i+1)+" of "+S.length;S[i].scrollTop=0}
+$("pv").onclick=function(){go(i-1)};$("nx").onclick=function(){go(i+1)};
+document.onkeydown=function(e){if(e.key==="ArrowRight")go(i+1);if(e.key==="ArrowLeft")go(i-1)};
+function ic(k){return k&&k.length>2&&k.charAt(0)!=="&"?'<svg><use href="#'+k+'"/></svg>':'<div class="em">'+(k||"")+"</div>"}
+function vocab(id,a){$(id).innerHTML=a.map(function(w){return '<div class="c v">'+ic(w[3])+"<b>"+w[0]+"</b><i>"+w[1]+"</i><p>"+w[2]+"</p></div>"}).join("")}
+vocab("v1",[["witch","bruxa","The witch has a black cat.","hat"],["wizard","mago","The wizard has a magic wand.","🧙"],["ghost","fantasma","The ghost is inside the haunted house.","ghost"],["vampire","vampiro","I am wearing a vampire costume.","🧛"],["zombie","zumbi","The zombie walks slowly.","🧟"],["skeleton","esqueleto","A skeleton has no skin!","skull"],["monster","monstro","The monster is green and funny.","👹"],["mummy","múmia","The mummy is wrapped in bandages.","🩹"],["werewolf","lobisomem","The werewolf howls at the moon.","🐺"],["black cat","gato preto","The black cat is under the chair.","cat"],["bat","morcego","A bat can fly at night.","bat"],["spider","aranha","The spider is on the web.","spider"]]);
+vocab("v2",[["pumpkin","abóbora","There is a pumpkin next to the door.","pumpkin"],["jack-o’-lantern","abóbora esculpida","Our jack-o’-lantern has a big smile.","🎃"],["broomstick","vassoura","A witch can use a broomstick.","🧹"],["cauldron","caldeirão","The potion is in the cauldron.","pot"],["magic wand","varinha","I have a magic wand.","🪄"],["spell book","livro de feitiços","The spell book is very old.","📖"],["potion","poção","This potion is green.","🧪"],["costume / mask / cape","fantasia / máscara / capa","I’m wearing a long cape.","🦇"],["witch hat","chapéu de bruxa","The witch hat is black and purple.","hat"],["candy bucket","balde de doces","My candy bucket is full!","candy"],["spider web","teia","There is a spider web in the corner.","🕸️"],["candle / skull","vela / caveira","There is a candle next to the skull.","skull"]]);
+vocab("v3",[["haunted house","casa mal-assombrada","This house looks haunted!","🏚️"],["graveyard / cemetery","cemitério","The ghosts live in the graveyard.","🪦"],["spooky forest","floresta assustadora","The spooky forest is dark.","🌲"],["castle","castelo","The vampire lives in a castle.","🏰"],["dark hallway / secret room","corredor escuro / sala secreta","There is a secret room!","🚪"],["trick-or-treating","doces ou travessuras","We go trick-or-treating at night.","candy"],["carving pumpkins","esculpir abóboras","I love carving pumpkins.","pumpkin"],["telling scary stories","contar histórias de medo","We are telling scary stories.","👻"],["Halloween party / movies","festa / filmes","I’m going to a Halloween party.","🎬"],["collecting candy","juntar doces","I’m collecting candy.","candy"]]);
+function chips(id,a,multi,out){var el=$(id);el.innerHTML=a.map(function(t){return '<button class="ch">'+t+"</button>"}).join("");[].forEach.call(el.children,function(b){b.onclick=function(){if(!multi)[].forEach.call(el.children,function(x){x.classList.remove("on")});b.classList.toggle("on");if(out)out(b.textContent)}})}
+chips("mood",["brave","scared","excited","curious","mysterious","sleepy","mischievous"],0,function(t){$("mt").innerHTML="<b>You chose “"+t+"”.</b> Why? Say: “I feel "+t+" because…”"});
+chips("cos",["witch","vampire","fairy","princess","zombie","skeleton","superhero","ghost","black cat","detective","mysterious magician","my own fantasy character"],0);
+chips("acc",["black hat","cape","mask","wings","boots","gloves","magic wand","necklace","makeup","fake fangs"],1);
+document.querySelectorAll(".hs").forEach(function(e){e.onclick=function(){$("hi").textContent=e.getAttribute("data-t")}});
+function R(el){el.onclick=function(){el.classList.toggle("on")}}
+$("tf").innerHTML=[["A vampire is afraid of garlic.","TRUE in the legends!"],["A pumpkin can fly.","FALSE"],["A witch can use a broomstick.","TRUE"],["A skeleton has muscles.","FALSE"],["A bat has wings.","TRUE"]].map(function(c){return '<div class="c"><p>'+c[0]+'</p><span class="rv">'+c[1]+"</span></div>"}).join("");
+document.querySelectorAll(".rv").forEach(R);
+var items=["ghost","pumpkin","bat","cat","hat","skull","pot","candy"],hid=-1;
+function wm(){$("wm").innerHTML=items.map(function(k,n){return '<div class="c v" style="width:90px;'+(n===hid?"visibility:hidden":"")+'"><svg><use href="#'+k+'"/></svg></div>'}).join("")}wm();
+$("wmb").onclick=function(){if(hid>-1){hid=-1;$("wmt").style.display="none"}else{hid=Math.floor(Math.random()*items.length);$("wmt").style.display="inline";$("wmt").textContent="Answer: "+items[hid]}wm();$("wmb").textContent=hid>-1?"Show all":"Hide one!"};
+var RP={A:["A. Arriving at the party","Teacher is the host. Hi! What’s your name? What are you dressed as? Do you like my costume? Why did you choose this costume? Are you having fun? Greet me and tell me about your costume!"],B:["B. Trick or treat!","Teacher opens the door. Say: Trick or treat! Can I have some candy, please? Thank you! I love this house! Your decorations are amazing!"],C:["C. The mysterious mission","Teacher: “Some Halloween objects disappeared!” What can you see? Where is the pumpkin? Who is behind the door? Is there anything strange in this room? What should we do? Search, describe and explain where you found them."]};
+chips("rp",[RP.A[0],RP.B[0],RP.C[0]],0,function(t){$("rpb").innerHTML="<p>"+RP[t.charAt(0)][1]+"</p><p class='q'>No script. I will react to your answers!</p>"});
+$("rpb").innerHTML="<p class='q'>Choose a scenario.</p>";
+var cols=["#111","#8a3ffc","#ff8a1f","#4ec94e","#e33","#2b7fff","#ffd84a","#fff"];
+function cvs(id){var c=$(id),x=c.getContext("2d"),d=0,col=cols[0];x.lineCap="round";x.lineWidth=6;
+document.querySelector('.pal[data-for="'+id+'"]').innerHTML=cols.map(function(k){return '<i style="background:'+k+'" data-c="'+k+'"></i>'}).join("");
+document.querySelector('.pal[data-for="'+id+'"]').onclick=function(e){if(e.target.dataset.c)col=e.target.dataset.c};
+document.querySelector('[data-clear="'+id+'"]').onclick=function(){x.clearRect(0,0,c.width,c.height)};
+function p(e){var r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height]}
+c.onpointerdown=function(e){d=1;var q=p(e);x.beginPath();x.moveTo(q[0],q[1])};
+c.onpointermove=function(e){if(!d)return;var q=p(e);x.strokeStyle=col;x.lineTo(q[0],q[1]);x.stroke()};
+c.onpointerup=c.onpointerleave=function(){d=0}}
+cvs("cv1");go(0);
+</script>
+</body>
+</html>
